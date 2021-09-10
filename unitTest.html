@@ -1,0 +1,86 @@
+<meta charset="utf-8">
+<title>Test Suite</title>
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.17.0.css">
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.17.0.js"></script>
+    <script src="controller.js"></script>
+</body>
+<script>
+    let numbers = []
+    let chosenBar = '';
+    let inputValue;
+    let feilmelding = '';
+
+    function show() { }
+    QUnit.test('Velge stolpe fra array', function (assert) {
+        numbers = [1, 2, 3, 4, 5]
+        chooseBar(5);
+        let actual5 = numbers[4];
+        let expected5 = 5;
+        chooseBar(4);
+        let actual4 = numbers[3];
+        let expected4 = 4;
+        chooseBar(3);
+        let actual3 = numbers[2];
+        let expected3 = 3;
+        chooseBar(2);
+        let actual2 = numbers[1];
+        let expected2 = 2;
+        chooseBar(1);
+        let actual1 = numbers[0];
+        let expected1 = 1;
+
+        assert.equal(actual5, expected5, ` Vi har valgt stolpe med verdi 5. Og fikk ${actual5} `)
+        assert.equal(actual4, expected4, ` Vi har valgt stolpe med verdi 4. Og fikk ${actual4} `)
+        assert.equal(actual3, expected3, ` Vi har valgt stolpe med verdi 3. Og fikk ${actual3} `)
+        assert.equal(actual2, expected2, ` Vi har valgt stolpe med verdi 2. Og fikk ${actual2} `)
+        assert.equal(actual1, expected1, ` Vi har valgt stolpe med verdi 1. Og fikk ${actual1} `)
+        assert.equal(numbers.length, 5, 'sjekker at lengden på array stemmer')
+    });
+
+    QUnit.test('Deselect av stolpe', function (assert) {
+        chosenBar = 2;
+        chooseBar(2);
+        let actual = chosenBar;
+        let expected = '';
+
+        assert.equal(actual, expected, ` vi sjekker om stolpen deselectes om den allerede er selecta. chosenbar= ${actual} `)
+    });
+
+    QUnit.test('Fjerne en verdi fra array', function (assert) {
+        numbers = [1, 2, 3, 4, 5]
+        removePillar(5);
+        let actual = numbers[4];
+        let expected = undefined;
+
+        assert.equal(actual, expected, ` vi skulle fått undefined. Og fikk ${actual} `)
+        assert.equal(numbers.length, 4, 'sjekker at lengden på array stemmer')
+    });
+
+    QUnit.test('endre verdi fra array', function (assert) {
+        numbers = [1, 2, 3, 4, 5]
+        inputValue = 2;
+        changePillar(5);
+        let actual = numbers[4];
+        let expected = 2;
+
+        assert.equal(actual, expected, ` vi skulle fått 2. Og fikk ${actual} `)
+        assert.equal(numbers.length, 5, 'sjekker at lengden på array stemmer')
+    });
+
+    QUnit.test('legge til verdi i array', function (assert) {
+        numbers = [1, 2, 3, 4, 5]
+        inputValue = 6;
+        addPillar();
+        let actual = numbers[5];
+        let expected = 6;
+
+        assert.equal(actual, expected, ` vi skulle fått 6. Og fikk ${actual} `)
+        assert.equal(numbers.length, 6, 'sjekker at lengden på array har økt med 1')
+    });
+
+
+</script>
